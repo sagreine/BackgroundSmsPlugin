@@ -52,7 +52,15 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler {
       String msg = call.argument("msg");
       Integer simSlot = call.argument("simSlot");
       sendSMS(num, msg, simSlot, result);
-    }else if(call.method.equals("isSupportMultiSim")) {
+    }
+    else if (call.method.equals("sendMms")) {
+      String num = call.argument("phone");
+      String msg = call.argument("msg");
+      String filePath = call.argument("filePath");
+      Integer simSlot = call.argument("simSlot");
+      sendMMS(num, msg, simSlot, result);
+    }
+    else if(call.method.equals("isSupportMultiSim")) {
       isSupportCustomSim(result);
     } else{
       result.notImplemented();
@@ -87,6 +95,102 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler {
     }
   }
 
+public void sendMMS(String num, String msg, String filePath, Integer simSlot,Result result)
+        {
+             
+      SmsManager smsManager;
+      if (simSlot == null) {
+        smsManager = SmsManager.getDefault();
+      } else {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          smsManager = SmsManager.getSmsManagerForSubscriptionId(simSlot);
+        } else {
+          smsManager = SmsManager.getDefault();
+        }
+      }
+            
+            byte[] sendPDUData = GetMMSPDUData(num, filePath, msg);
+
+            if (sendPDUData != null)
+            {
+                SendMMSData(sendPDUData);
+            }
+        }
+
+        public byte[] GetMMSPDUData(string DestinationNumber, string filePath, string msg)
+        {
+            byte[] pduData = null;
+            try
+            {
+                SendReq sendReq = new SendReq();
+
+                sendReq.AddTo(new EncodedStringValue(DestinationNumber));
+
+                PduBody pduBody = new PduBody();
+
+                // Add text message data to message
+                PduPart txtPart = new PduPart();
+                txtPart.SetData(Encoding.ASCII.GetBytes(msg));
+                txtPart.SetContentType(new EncodedStringValue("text/plan").GetTextString());
+                txtPart.SetName(new EncodedStringValue("Message").GetTextString());
+                pduBody.AddPart(txtPart);
+
+                // Add image data 
+                // TODO: Later, this will be audio file. But image file for testing
+                PduPart imgPart = new PduPart();
+                byte[] sampleImageData = System.IO.File.ReadAllBytes(filePath);
+
+                imgPart.SetData(sampleImageData);
+                imgPart.SetContentType(new EncodedStringValue("image/jpg").GetTextString());
+                imgPart.SetFilename(new EncodedStringValue(System.IO.Path.GetFileName(filePath)).GetTextString());
+                pduBody.AddPart(imgPart);
+
+                // Now create body of MMS
+                sendReq.Body = pduBody;
+                // Finally, generate the byte array to send to the MMS provider
+                PduComposer composer = new PduComposer(sendReq);
+                pduData = composer.Make();
+            }
+            catch(Exception ex)
+            {
+                // TODO: Do something here
+            }
+            return pduData;
+
+        }
+
+        public bool SendMMSData(byte[] PDUData)
+        {
+            Context ctx = MainActivity.Instance;
+            Android.Telephony.SmsManager sm = Android.Telephony.SmsManager.Default;
+          
+            try
+            {
+                string cacheFilePath = System.IO.Path.Combine(CTX.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
+                System.IO.File.WriteAllBytes(cacheFilePath, PDUData);
+                Java.IO.File testFile = new Java.IO.File(cacheFilePath);
+                byte[] byteArray = System.IO.File.ReadAllBytes(cacheFilePath);
+
+
+                string authString = CTX.PackageName + ".fileprovider";
+                if (System.IO.File.Exists(cacheFilePath))
+                {
+                    //Android.Net.Uri contentURI = (AndroidX.Core.Content.FileProvider.GetUriForFile(CTX, CTX.PackageName + ".fileprovider", testFile));
+                    Android.Net.Uri contentUri = (FileProvider.GetUriForFile(ctx, ctx.PackageName + ".fileprovider", testFile));
+                    PendingIntent pendingIntent = PendingIntent.GetBroadcast(CTX, 0, new Intent(CTX.PackageName + ".WAP_PUSH_DELIVER"), 0);
+
+                    sm.SendMultimediaMessage(CTX, contentURI, null, null, pendingIntent);
+                }
+            }
+            catch(Exception ex)
+            {
+                String exString = ex.ToString();
+                return false;
+            }
+            return true;
+        }
+
+  
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
     channel.setMethodCallHandler(null);
