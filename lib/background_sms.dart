@@ -8,7 +8,7 @@ enum MmsStatus { sent, failed }
 class BackgroundSms {
   static const MethodChannel _channel = const MethodChannel('background_sms');
 
-  static Future<SmsStatus> sendMessage(
+  static Future<SmsStatus> sendSMS(
       {required String phoneNumber,
       required String message,
       int? simSlot}) async {
@@ -24,7 +24,7 @@ class BackgroundSms {
       return SmsStatus.failed;
     }
   }
-    static Future<MmsStatus> sendMessage(
+    static Future<MmsStatus> sendMMS(
       {required String phoneNumber,
       required String message,
        required String filePath,
