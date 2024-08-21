@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 enum SmsStatus { sent, failed }
+enum MmsStatus { sent, failed }
 
 class BackgroundSms {
   static const MethodChannel _channel = const MethodChannel('background_sms');
@@ -21,6 +22,24 @@ class BackgroundSms {
     } on PlatformException catch (e) {
       print(e.toString());
       return SmsStatus.failed;
+    }
+  }
+    static Future<MmsStatus> sendMessage(
+      {required String phoneNumber,
+      required String message,
+       required String filePath,
+      int? simSlot}) async {
+    try {
+      String? result = await _channel.invokeMethod('sendMms', <String, dynamic>{
+        "phone": phoneNumber,
+        "msg": message,
+        "filePath": filePath,
+        "simSlot": simSlot          
+      });
+      return result == "Sent" ? MmsStatus.sent : MmsStatus.failed;
+    } on PlatformException catch (e) {
+      print(e.toString());
+      return MmsStatus.failed;
     }
   }
 
