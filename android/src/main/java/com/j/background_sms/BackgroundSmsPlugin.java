@@ -95,7 +95,7 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler {
     }
   }
 
-public void sendMMS(String num, String msg, String filePath, Integer simSlot,Result result)
+private void sendMMS(String num, String msg, String filePath, Integer simSlot,Result result)
         {
              
       SmsManager smsManager;
@@ -117,7 +117,7 @@ public void sendMMS(String num, String msg, String filePath, Integer simSlot,Res
             }
         }
 
-        public byte[] GetMMSPDUData(string DestinationNumber, string filePath, string msg)
+        private byte[] GetMMSPDUData(string DestinationNumber, string filePath, string msg)
         {
             byte[] pduData = null;
             try
@@ -159,7 +159,7 @@ public void sendMMS(String num, String msg, String filePath, Integer simSlot,Res
 
         }
 
-        public bool SendMMSData(byte[] PDUData)
+        private bool SendMMSData(byte[] PDUData)
         {
             Context ctx = MainActivity.Instance;
             Android.Telephony.SmsManager sm = Android.Telephony.SmsManager.Default;
