@@ -23,6 +23,24 @@ class BackgroundSms {
       return SmsStatus.failed;
     }
   }
+    static Future<SmsStatus> sendMms(
+      {required String phoneNumber,
+      required String message,
+       required String filePath
+      int? simSlot}) async {
+    try {
+      String? result = await _channel.invokeMethod('sendMms', <String, dynamic>{
+        "phone": phoneNumber,
+        "msg": message,
+        "filePath": filePath
+        "simSlot": simSlot          
+      });
+      return result == "Sent" ? SmsStatus.sent : SmsStatus.failed;
+    } on PlatformException catch (e) {
+      print(e.toString());
+      return SmsStatus.failed;
+    }
+  }
 
   static Future<bool?> get isSupportCustomSim async {
     try {
