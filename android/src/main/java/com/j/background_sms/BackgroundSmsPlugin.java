@@ -58,7 +58,7 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler {
       String msg = call.argument("msg");
       String filePath = call.argument("filePath");
       Integer simSlot = call.argument("simSlot");
-      sendMMS(num, msg, simSlot, result);
+      sendMMS(num, msg, filePath, simSlot, result);
     }
     else if(call.method.equals("isSupportMultiSim")) {
       isSupportCustomSim(result);
