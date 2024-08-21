@@ -52,7 +52,16 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler {
       String msg = call.argument("msg");
       Integer simSlot = call.argument("simSlot");
       sendSMS(num, msg, simSlot, result);
+    }
+    else if (call.method.equals("sendMms")) {
+      String num = call.argument("phone");
+      String msg = call.argument("msg");
+      String filePath = call.argument("filePath");
+      Integer simSlot = call.argument("simSlot");
+      sendMMS(num, msg, simSlot, result);
     }else if(call.method.equals("isSupportMultiSim")) {
+      isSupportCustomSim(result);
+    else if(call.method.equals("isSupportMultiSim")) {
       isSupportCustomSim(result);
     } else{
       result.notImplemented();
@@ -86,6 +95,112 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler {
       result.error("Failed", "Sms Not Sent", "");
     }
   }
+  public void sendMms(String num, String msg, String filePath, Integer simSlot,Result result)
+        {
+      SmsManager smsManager;
+      if (simSlot == null) {
+        smsManager =  Context.getSystemService(SmsManager.class);
+      } else {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          smsManager = SmsManager.getSmsManagerForSubscriptionId(simSlot);
+        } else {
+          smsManager =  Context.getSystemService(SmsManager.class);
+        }
+      }
+            IList<string> divideContents = smsMessage.DivideMessage("I auto sent this message to you! No typing here!!!!!");
+            //string filePath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures) + "/TestPic.jpg";
+
+
+
+            byte[] sendPDUData = GetMMSPDUData(num, filePath, msg);
+
+            if (sendPDUData != null)
+            {
+                SendMMSData(sendPDUData);
+            }
+        }
+
+        public byte[] GetMMSPDUData(string DestinationNumber, string filePath, string smsMessage)
+        {
+            byte[] pduData = null;
+            try
+            {
+                SendReq sendReq = new SendReq();
+
+                sendReq.AddTo(new EncodedStringValue(DestinationNumber));
+
+                PduBody pduBody = new PduBody();
+
+                // Add text message data to message
+                PduPart txtPart = new PduPart();
+                txtPart.SetData(Encoding.ASCII.GetBytes(smsMessage));
+                txtPart.SetContentType(new EncodedStringValue("text/plan").GetTextString());
+                txtPart.SetName(new EncodedStringValue("Message").GetTextString());
+                pduBody.AddPart(txtPart);
+
+                // Add image data                 
+                PduPart imgPart = new PduPart();
+                byte[] sampleImageData = System.IO.File.ReadAllBytes(filePath);
+
+                imgPart.SetData(sampleImageData);
+                imgPart.SetContentType(new EncodedStringValue("image/jpg").GetTextString());
+                imgPart.SetFilename(new EncodedStringValue(System.IO.Path.GetFileName(filePath)).GetTextString());
+                pduBody.AddPart(imgPart);
+
+                // Now create body of MMS
+                sendReq.Body = pduBody;
+                // Finally, generate the byte array to send to the MMS provider
+                PduComposer composer = new PduComposer(sendReq);
+                pduData = composer.Make();
+            }
+            catch(Exception ex)
+            {
+                // TODO: Do something here
+            }
+            return pduData;
+
+        }
+
+        public bool SendMMSData(byte[] PDUData)
+        {
+          Context ctx = MainActivity.Instance;
+            SmsManager smsManager;
+      if (simSlot == null) {
+        smsManager =  Context.getSystemService(SmsManager.class);
+      } else {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          smsManager = SmsManager.getSmsManagerForSubscriptionId(simSlot);
+        } else {
+          smsManager =  Context.getSystemService(SmsManager.class);
+        }
+      }
+            //Random rnd = new Random();
+          try
+            {
+                string cacheFilePath = System.IO.Path.Combine(CTX.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
+                System.IO.File.WriteAllBytes(cacheFilePath, PDUData);
+                Java.IO.File testFile = new Java.IO.File(cacheFilePath);
+                byte[] byteArray = System.IO.File.ReadAllBytes(cacheFilePath);
+
+
+                string authString = CTX.PackageName + ".fileprovider";
+                if (System.IO.File.Exists(cacheFilePath))
+                {
+                    //Android.Net.Uri contentURI = (AndroidX.Core.Content.FileProvider.GetUriForFile(CTX, CTX.PackageName + ".fileprovider", testFile));
+                    Android.Net.Uri contentUri = (FileProvider.GetUriForFile(ctx, ctx.PackageName + ".fileprovider", testFile));
+
+                    PendingIntent pendingIntent = PendingIntent.GetBroadcast(CTX, 0, new Intent(CTX.PackageName + ".WAP_PUSH_DELIVER"), 0);
+
+                    sm.SendMultimediaMessage(CTX, contentURI, null, null, pendingIntent);
+                }
+            }
+            catch(Exception ex)
+            {
+                String exString = ex.ToString();
+                return false;
+            }
+            return true;
+        }
 
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
