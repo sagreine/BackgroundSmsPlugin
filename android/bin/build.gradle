@@ -6,10 +6,6 @@ buildscript {
         google()
         jcenter()
     }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
-    }
 }
 
 rootProject.allprojects {
@@ -22,10 +18,10 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 33
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 23
     }
     lintOptions {
         disable 'InvalidPackage'
