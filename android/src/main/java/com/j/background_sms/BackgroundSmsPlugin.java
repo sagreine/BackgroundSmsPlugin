@@ -52,15 +52,13 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler {
       String msg = call.argument("msg");
       Integer simSlot = call.argument("simSlot");
       sendSMS(num, msg, simSlot, result);
-    }
-    else if (call.method.equals("sendMms")) {
+    }else if (call.method.equals("sendMms")) {
       String num = call.argument("phone");
       String msg = call.argument("msg");
       String filePath = call.argument("filePath");
       Integer simSlot = call.argument("simSlot");
       sendMMS(num, msg, filePath, simSlot, result);
-    }
-    else if(call.method.equals("isSupportMultiSim")) {
+    }else if(call.method.equals("isSupportMultiSim")) {
       isSupportCustomSim(result);
     } else{
       result.notImplemented();
@@ -117,7 +115,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             }
         }
 
-        private byte[] GetMMSPDUData(string DestinationNumber, string filePath, string msg)
+        private byte[] GetMMSPDUData(String DestinationNumber, String filePath, String msg)
         {
             byte[] pduData = null;
             try
