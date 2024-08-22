@@ -164,13 +164,13 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
           
             try
             {
-                string cacheFilePath = System.IO.Path.Combine(CTX.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
+                String cacheFilePath = System.IO.Path.Combine(CTX.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
                 System.IO.File.WriteAllBytes(cacheFilePath, PDUData);
                 Java.IO.File testFile = new Java.IO.File(cacheFilePath);
                 byte[] byteArray = System.IO.File.ReadAllBytes(cacheFilePath);
 
 
-                string authString = CTX.PackageName + ".fileprovider";
+                String authString = CTX.PackageName + ".fileprovider";
                 if (System.IO.File.Exists(cacheFilePath))
                 {
                     //Android.Net.Uri contentURI = (AndroidX.Core.Content.FileProvider.GetUriForFile(CTX, CTX.PackageName + ".fileprovider", testFile));
