@@ -198,12 +198,12 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 // Add image data 
                 // TODO: Later, this will be audio file. But image file for testing
                 PduPart imgPart = new PduPart();
-                byte[] sampleImageData = Files.readAllBytes(filePath);
+                byte[] sampleImageData = Files.readAllBytes(Paths.get(filePath));
 
                 imgPart.setData(sampleImageData);
                 imgPart.setContentType(new EncodedStringValue("image/jpg").getTextString());
                 //imgPart.SetFilename(new EncodedStringValue(System.IO.Path.GetFileName(filePath)).GetTextString());
-                imgPart.setFilename(new EncodedStringValue(Paths.get(filePath).getFileName()).getTextString());
+                imgPart.setFilename(new EncodedStringValue((Paths.get(filePath).getFileName()).getTextString()));
                 pduBody.addPart(imgPart);
 
                 // Now create body of MMS
