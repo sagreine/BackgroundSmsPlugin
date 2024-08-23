@@ -199,10 +199,10 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 pduBody.addPart(imgPart);
 
                 // Now create body of MMS
-                sendReq.Body = pduBody;
+                sendReq.body = pduBody;
                 // Finally, generate the byte array to send to the MMS provider
                 PduComposer composer = new PduComposer(sendReq);
-                pduData = composer.Make();
+                pduData = composer.make();
             }
             catch(Exception ex)
             {
