@@ -19,12 +19,11 @@ public class SendReq extends MultimediaMessagePdu {
      
             setFrom(new EncodedStringValue(PduHeaders.FROM_INSERT_ADDRESS_TOKEN_STR.getBytes()));
             setTransactionId(generateTransactionId());
-                  } catch (InvalidHeaderValueException e) {
+        } catch (InvalidHeaderValueException e) {
             // Impossible to reach here since all headers we set above are valid.
             Log.e(TAG, "Unexpected InvalidHeaderValueException.", e);
             throw new RuntimeException(e);
-        }
-    }
+        }    
     }
       public void AddTo(EncodedStringValue[] value) {
         mPduHeaders.setEncodedStringValues(value, PduHeaders.TO);
