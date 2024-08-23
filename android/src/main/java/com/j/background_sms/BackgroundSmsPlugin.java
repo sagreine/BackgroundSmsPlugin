@@ -202,10 +202,11 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 if (System.IO.File.Exists(cacheFilePath))
                 {
                     //Android.Net.Uri contentURI = (AndroidX.Core.Content.FileProvider.GetUriForFile(CTX, CTX.PackageName + ".fileprovider", testFile));
-                    Android.Net.Uri contentUri = (FileProvider.GetUriForFile(ctx, ctx.PackageName + ".fileprovider", testFile));
+                    //Android.Net.Uri contentUri = (FileProvider.GetUriForFile(ctx, ctx.PackageName + ".fileprovider", testFile));
                     PendingIntent pendingIntent = PendingIntent.GetBroadcast(CTX, 0, new Intent(CTX.PackageName + ".WAP_PUSH_DELIVER"), 0);
 
-                    sm.SendMultimediaMessage(CTX, contentURI, null, null, pendingIntent);
+                    //sm.SendMultimediaMessage(CTX, contentURI, null, null, pendingIntent);
+                    sm.SendMultimediaMessage(CTX, FileProvider.GetUriForFile(ctx, ctx.PackageName + ".fileprovider"), testFile, null, null, pendingIntent);                    
                 }
             }
             catch(Exception ex)
