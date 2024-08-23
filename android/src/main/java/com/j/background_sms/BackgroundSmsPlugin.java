@@ -19,7 +19,7 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.telephony.PhoneNumberUtils;
 
-import com.google.android.mms.pdu
+import com.google.android.mms.pdu;
 
 import java.io.File;
 import java.io.FileInputStream;
