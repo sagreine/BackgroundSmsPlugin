@@ -36,8 +36,11 @@ import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 
 import java.util.UUID;
-
+import android.app.Activity;
+import android.content.Context;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.embedding.engine.plugins.activity.ActivityAware;
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -45,18 +48,25 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** BackgroundSmsPlugin */
-public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler {
+public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
   /// The MethodChannel that will the communication between Flutter and native Android
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
   /// when the Flutter Engine is detached from the Activity
   private MethodChannel channel;
+  private lateinit var context: Context;
+  private lateinit var activity: Activity;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "background_sms");
-    channel.setMethodCallHandler(this);
+    channel.setMethodCallHandler(this);     
+    context = flutterPluginBinding.applicationContext
   }
+  @Override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+    activity = binding.activity;
+}
+
 
 
   // This static function is optional and equivalent to onAttachedToEngine. It supports the old
@@ -188,26 +198,26 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
         private boolean SendMMSData(byte[] PDUData)
         {
-            Context ctx = MainActivity.Instance;
+            //Context ctx = MainActivity.Instance;
             Android.Telephony.SmsManager sm = Android.Telephony.SmsManager.Default;
           
             try
             {
-                String cacheFilePath = System.IO.Path.Combine(CTX.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
+                String cacheFilePath = System.IO.Path.Combine(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
                 System.IO.File.WriteAllBytes(cacheFilePath, PDUData);
                 Java.IO.File testFile = new Java.IO.File(cacheFilePath);
                 byte[] byteArray = System.IO.File.ReadAllBytes(cacheFilePath);
 
 
-                String authString = CTX.PackageName + ".fileprovider";
+                String authString = context.PackageName + ".fileprovider";
                 if (System.IO.File.Exists(cacheFilePath))
                 {
                     //Android.Net.Uri contentURI = (AndroidX.Core.Content.FileProvider.GetUriForFile(CTX, CTX.PackageName + ".fileprovider", testFile));
                     //Android.Net.Uri contentUri = (FileProvider.GetUriForFile(ctx, ctx.PackageName + ".fileprovider", testFile));
-                    PendingIntent pendingIntent = PendingIntent.GetBroadcast(CTX, 0, new Intent(CTX.PackageName + ".WAP_PUSH_DELIVER"), 0);
+                    PendingIntent pendingIntent = PendingIntent.GetBroadcast(context, 0, new Intent(context.PackageName + ".WAP_PUSH_DELIVER"), 0);
 
                     //sm.SendMultimediaMessage(CTX, contentURI, null, null, pendingIntent);
-                    sm.SendMultimediaMessage(CTX, FileProvider.GetUriForFile(ctx, ctx.PackageName + ".fileprovider"), testFile, null, null, pendingIntent);                    
+                    sm.SendMultimediaMessage(context, FileProvider.GetUriForFile(context, context.PackageName + ".fileprovider"), testFile, null, null, pendingIntent);                    
                 }
             }
             catch(Exception ex)
