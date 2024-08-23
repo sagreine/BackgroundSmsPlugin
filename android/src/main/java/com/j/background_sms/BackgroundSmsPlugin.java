@@ -5,6 +5,26 @@ import android.content.Intent;
 import android.os.Build;
 import android.telephony.SmsManager;
 
+import android.app.PendingIntent.CanceledException;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
+import android.telephony.PhoneNumberUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import androidx.annotation.NonNull;
 
 import java.util.UUID;
@@ -157,7 +177,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
         }
 
-        private bool SendMMSData(byte[] PDUData)
+        private boolean SendMMSData(byte[] PDUData)
         {
             Context ctx = MainActivity.Instance;
             Android.Telephony.SmsManager sm = Android.Telephony.SmsManager.Default;
