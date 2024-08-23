@@ -207,10 +207,10 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 pduBody.addPart(txtPart);
 
                 // Add image data 
-              /*
+              
                 PduPart imgPart = new PduPart();
                 byte[] sampleImageData = Files.readAllBytes(Paths.get(filePath));
-
+                /*
                 imgPart.setData(sampleImageData);
                 imgPart.setContentType(new EncodedStringValue("image/jpg").getTextString());
                 imgPart.setFilename((Paths.get(filePath).getFileName()).toString().getBytes());
