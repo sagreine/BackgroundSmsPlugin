@@ -176,7 +176,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
             if (sendPDUData != null)
             {
-              SendMMSData(sendPDUData, simSlot, smsManager);
+              SendMMSData(sendPDUData, simSlot, smsManager, result);
               result.success("Sent MMS yay");
             }
            
@@ -221,7 +221,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
               
                 // Finally, generate the byte array to send to the MMS provider
                 //PduComposer composer = new PduComposer(context, sendReq);
-              PduComposer composer = new PduComposer(activity.getApplicationContext(), sendReq);
+                PduComposer composer = new PduComposer(activity.getApplicationContext(), sendReq);
               
                 pduData = composer.make();
               
@@ -235,7 +235,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             return pduData;
         }
 
-        private void SendMMSData(byte[] PDUData, Integer simSlot, SmsManager sm)
+        private void SendMMSData(byte[] PDUData, Integer simSlot, SmsManager sm, Result result)
         {
           context = activity.getApplicationContext();         
             try
