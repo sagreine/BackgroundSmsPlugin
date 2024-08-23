@@ -151,8 +151,7 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
         }
       }
       smsManager.sendTextMessage(num, null, msg, null, null);
-      PrintFromJava();
-      result.success("Sent");
+      result.success("Sent SMS");
     } catch (Exception ex) {
       ex.printStackTrace();
       result.error("Failed", "Sms Not Sent", "");
@@ -178,7 +177,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             if (sendPDUData != null)
             {
                 SendMMSData(sendPDUData, simSlot, smsManager);
-              result.success("Sent");
+              result.success("Sent MMS yay");
             }
         }catch (Exception ex) {
       ex.printStackTrace();
@@ -186,7 +185,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
       }
    }
 
-        private byte[] GetMMSPDUData(String DestinationNumber, String filePath, String msg)
+        private byte[] GetMMSPDUData(String DestinationNumber, String filePath, String msg, Result result)
         {
             byte[] pduData = null;
             try
@@ -232,6 +231,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             catch(Exception ex)
             {
                 // TODO: Do something here
+              result.error("Failed", "GetMMSPDUData failure", "");
               return pduData;
             }
             return pduData;
