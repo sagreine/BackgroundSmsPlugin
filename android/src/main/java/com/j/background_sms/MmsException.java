@@ -1,3 +1,4 @@
+package com.j.background_sms;
 
 public class MmsException extends Exception {
     private static final long serialVersionUID = -7323249827281485390L;

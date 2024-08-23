@@ -1,3 +1,5 @@
+package com.j.background_sms;
+
 public class SendReq extends MultimediaMessagePdu {
     private static final String TAG = "SendReq";
     public SendReq() {

@@ -1,3 +1,4 @@
+package com.j.background_sms;
 
 public class PduContentTypes {
     /**
