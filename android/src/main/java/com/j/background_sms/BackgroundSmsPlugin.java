@@ -53,9 +53,9 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
   /// when the Flutter Engine is detached from the Activity
-  private lateinit var channel : MethodChannel
-  private lateinit var context: Context
-  private lateinit var activity: Activity
+  private var channel : MethodChannel;
+  private var context: Context;
+  private var activity: Activity;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
