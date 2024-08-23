@@ -151,7 +151,7 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
 
 private void sendMMS(String num, String msg, String filePath, Integer simSlot,Result result)
         {
-             
+         try{   
       SmsManager smsManager;
       if (simSlot == null) {
         smsManager = SmsManager.getDefault();
@@ -169,6 +169,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             {
                 SendMMSData(sendPDUData, simSlot);
             }
+        }
         }
 
         private byte[] GetMMSPDUData(String DestinationNumber, String filePath, String msg)
@@ -224,22 +225,18 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
         private boolean SendMMSData(byte[] PDUData, Integer simSlot)
         {
-            //Context ctx = MainActivity.Instance;
-            //context = activity.Instance;
-            //context = activity.this;
+
           context = activity;
-//            Android.Telephony.SmsManager sm = Android.Telephony.SmsManager.Default;
           SmsManager sm;
-                if (simSlot == null) {
-        sm = sm.getDefault();
-      } else {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-          sm = sm.getSmsManagerForSubscriptionId(simSlot);
-        } else {
-          sm = sm.getDefault();
-        }
-      }
-          
+          if (simSlot == null) {
+            sm = sm.getDefault();
+          } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+              sm = sm.getSmsManagerForSubscriptionId(simSlot);
+            } else {
+              sm = sm.getDefault();
+           }
+         }                   
             try
             {
               //String cacheFilePath = System.IO.Path.combine(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
