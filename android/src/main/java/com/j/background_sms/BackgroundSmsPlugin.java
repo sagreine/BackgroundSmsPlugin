@@ -21,6 +21,9 @@ import android.telephony.PhoneNumberUtils;
 //import java.io.File;
 import java.nio.file.*;
 import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
@@ -175,7 +178,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             {
                 SendReq sendReq = new SendReq();
 
-                sendReq.AddTo(new EncodedStringValue(DestinationNumber));
+                //sendReq.AddTo(new EncodedStringValue(DestinationNumber));
+                sendReq.AddTo(new EncodedStringValue[](DestinationNumber.getBytes()));
 
                 PduBody pduBody = new PduBody();
 
