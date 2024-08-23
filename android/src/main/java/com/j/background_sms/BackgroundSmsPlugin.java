@@ -215,7 +215,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
         private boolean SendMMSData(byte[] PDUData)
         {
             //Context ctx = MainActivity.Instance;
-            context = activity.Instance;
+            //context = activity.Instance;
+          context = activity.this;
 //            Android.Telephony.SmsManager sm = Android.Telephony.SmsManager.Default;
           SmsManager sm;
                 if (simSlot == null) {
