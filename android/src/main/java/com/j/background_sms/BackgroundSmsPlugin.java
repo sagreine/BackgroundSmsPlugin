@@ -155,7 +155,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
                 // Add text message data to message
                 PduPart txtPart = new PduPart();
-                txtPart.SetData(Encoding.ASCII.GetBytes(msg));
+                // Encoding.ASCII.GetBytes
+                txtPart.SetData((msg.GetBytes(StandardCharsets.US_ASCII)));
                 txtPart.SetContentType(new EncodedStringValue("text/plan").GetTextString());
                 txtPart.SetName(new EncodedStringValue("Message").GetTextString());
                 pduBody.AddPart(txtPart);
