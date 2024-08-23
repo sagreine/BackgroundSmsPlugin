@@ -30,4 +30,8 @@ public class SendReq extends MultimediaMessagePdu {
     public byte[] getTransactionId() {
         return mPduHeaders.getTextString(PduHeaders.TRANSACTION_ID);
     }
+    private byte[] generateTransactionId() {
+        String transactionId = "T" + Long.toHexString(System.currentTimeMillis());
+        return transactionId.getBytes();
+    }
 }
