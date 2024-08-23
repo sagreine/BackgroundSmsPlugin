@@ -210,7 +210,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 // Now create body of MMS
                 sendReq.body = pduBody;
                 // Finally, generate the byte array to send to the MMS provider
-                PduComposer composer = new PduComposer(sendReq);
+                PduComposer composer = new PduComposer(context, sendReq);
                 pduData = composer.make();
             }
             catch(Exception ex)
@@ -226,6 +226,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             //Context ctx = MainActivity.Instance;
             //context = activity.Instance;
           context = activity.this;
+          context = activity;
 //            Android.Telephony.SmsManager sm = Android.Telephony.SmsManager.Default;
           SmsManager sm;
                 if (simSlot == null) {
