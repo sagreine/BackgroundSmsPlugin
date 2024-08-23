@@ -177,7 +177,7 @@ private class EncodedStringValue implements Cloneable {
         try {
             mData = data.getBytes(CharacterSets.DEFAULT_CHARSET_NAME);
             mCharacterSet = CharacterSets.DEFAULT_CHARSET;
-        } catch () {
+        } catch (Exception e) {
             
         }
     }
@@ -235,8 +235,8 @@ private class EncodedStringValue implements Cloneable {
             try {
                 String name = CharacterSets.getMimeName(mCharacterSet);
                 return new String(mData, name);
-            } catch () {            	
-                }
+            } catch (Exception e) {            	
+                
             }
         }
     }
@@ -299,7 +299,7 @@ private class EncodedStringValue implements Cloneable {
             try {
                 ret[i] = new EncodedStringValue(mCharacterSet,
                         temp[i].getBytes());
-            } catch () {
+            } catch (Exception e) {
                 // Can't arrive here
                 return null;
             }
