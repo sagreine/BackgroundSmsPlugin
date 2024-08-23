@@ -239,7 +239,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
         private void SendMMSData(byte[] PDUData, Integer simSlot, SmsManager sm)
         {
-          context = activity;         
+          context = activity.getApplicationContext();         
             try
             {
               //String cacheFilePath = System.IO.Path.combine(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
