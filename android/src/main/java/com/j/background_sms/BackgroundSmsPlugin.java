@@ -164,7 +164,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
             if (sendPDUData != null)
             {
-                SendMMSData(sendPDUData);
+                SendMMSData(sendPDUData, simSlot);
             }
         }
 
@@ -212,7 +212,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
         }
 
-        private boolean SendMMSData(byte[] PDUData)
+        private boolean SendMMSData(byte[] PDUData, Integer simSlot)
         {
             //Context ctx = MainActivity.Instance;
             //context = activity.Instance;
