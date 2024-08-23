@@ -207,7 +207,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 pduBody.addPart(txtPart);
 
                 // Add image data 
-                // TODO: Later, this will be audio file. But image file for testing
+              /*
                 PduPart imgPart = new PduPart();
                 byte[] sampleImageData = Files.readAllBytes(Paths.get(filePath));
 
@@ -221,6 +221,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 // Finally, generate the byte array to send to the MMS provider
                 PduComposer composer = new PduComposer(context, sendReq);
                 pduData = composer.make();
+              */
             }
             catch(Exception ex)
             {
