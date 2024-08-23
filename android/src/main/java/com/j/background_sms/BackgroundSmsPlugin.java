@@ -108,6 +108,9 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
       String msg = call.argument("msg");
       Integer simSlot = call.argument("simSlot");
       sendSMS(num, msg, simSlot, result);
+    }else if (call.method.equals("PrintFromJava")){
+                String myString = PrintFromJava();
+                result.success(myString);
     }else if (call.method.equals("sendMms")) {
       String num = call.argument("phone");
       String msg = call.argument("msg");
@@ -120,6 +123,11 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
       result.notImplemented();
     }
   }
+
+  private String PrintFromJava(){
+        System.out.print("this is a print in java mainactivity");
+        return "This is a string returned from Java";
+    }
 
   private void isSupportCustomSim(Result result){
     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
