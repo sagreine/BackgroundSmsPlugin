@@ -248,7 +248,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 //                Java.IO.File testFile = new Java.IO.File(cacheFilePath);
               File testFile = new File(cacheFilePath);
 //                byte[] byteArray = System.IO.File.ReadAllBytes(cacheFilePath);
-              byte[] byteArray = Files.readAllBytes(cacheFilePath);              
+              byte[] byteArray = Files.readAllBytes(Paths.get(cacheFilePath));              
 
                 //String authString = context.PackageName + ".fileprovider";
               // this is dumb and bad, try reading and catch
@@ -262,7 +262,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
                     //sm.SendMultimediaMessage(CTX, contentURI, null, null, pendingIntent);
                     //sm.SendMultimediaMessage(context, FileProvider.GetUriForFile(context, context.PackageName + ".fileprovider"), testFile, null, null, pendingIntent);                    
-                    sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider"), testFile, null, null, pendingIntent);                    
+                    //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider"), testFile, null, null, pendingIntent);                    
+                    sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider", testFile), null, null, pendingIntent);       
                 }
             }
             catch(Exception ex)
