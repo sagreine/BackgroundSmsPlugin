@@ -203,7 +203,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 imgPart.setData(sampleImageData);
                 imgPart.setContentType(new EncodedStringValue("image/jpg").getTextString());
                 //imgPart.SetFilename(new EncodedStringValue(System.IO.Path.GetFileName(filePath)).GetTextString());
-                imgPart.setFilename(new EncodedStringValue((Paths.get(filePath).getFileName()).getTextString()));
+                //imgPart.setFilename(new EncodedStringValue((Paths.get(filePath).getFileName()).getTextString()));
+                imgPart.setFilename((Paths.get(filePath).getFileName()).toString().getBytes());
                 pduBody.addPart(imgPart);
 
                 // Now create body of MMS
