@@ -271,8 +271,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             }
             catch(Exception ex)
             {
-                String exString = ex.toString();
-                
+              result.error("Failed", "SendMMSData failure be like:" + ex.toString(), "");                
             }
             
         }
