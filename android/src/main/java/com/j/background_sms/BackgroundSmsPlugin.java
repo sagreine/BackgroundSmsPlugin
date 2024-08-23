@@ -226,7 +226,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
         {
             //Context ctx = MainActivity.Instance;
             //context = activity.Instance;
-          context = activity.this;
+            //context = activity.this;
           context = activity;
 //            Android.Telephony.SmsManager sm = Android.Telephony.SmsManager.Default;
           SmsManager sm;
@@ -259,7 +259,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 {
                     //Android.Net.Uri contentURI = (AndroidX.Core.Content.FileProvider.GetUriForFile(CTX, CTX.PackageName + ".fileprovider", testFile));
                     //Android.Net.Uri contentUri = (FileProvider.GetUriForFile(ctx, ctx.PackageName + ".fileprovider", testFile));
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.PackageName + ".WAP_PUSH_DELIVER"), 0);
+                    //PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.PackageName + ".WAP_PUSH_DELIVER"), 0);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent("backround_sms" + ".WAP_PUSH_DELIVER"), 0);
 
                     //sm.SendMultimediaMessage(CTX, contentURI, null, null, pendingIntent);
                     //sm.SendMultimediaMessage(context, FileProvider.GetUriForFile(context, context.PackageName + ".fileprovider"), testFile, null, null, pendingIntent);                    
