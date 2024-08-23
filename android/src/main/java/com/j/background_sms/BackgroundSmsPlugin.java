@@ -48,6 +48,91 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+
+
+private class GenericPdu {
+    /**
+     * The headers of pdu.
+     */
+    PduHeaders mPduHeaders = null;
+    /**
+     * Constructor.
+     */
+    public GenericPdu() {
+        mPduHeaders = new PduHeaders();
+    }
+    /**
+     * Constructor.
+     *
+     * @param headers Headers for this PDU.
+     */
+    GenericPdu(PduHeaders headers) {
+        mPduHeaders = headers;
+    }
+    /**
+     * Get the headers of this PDU.
+     *
+     * @return A PduHeaders of this PDU.
+     */
+    PduHeaders getPduHeaders() {
+        return mPduHeaders;
+    }
+    /**
+     * Get X-Mms-Message-Type field value.
+     *
+     * @return the X-Mms-Report-Allowed value
+     */
+    public int getMessageType() {
+        return mPduHeaders.getOctet(PduHeaders.MESSAGE_TYPE);
+    }
+    /**
+     * Set X-Mms-Message-Type field value.
+     *
+     * @param value the value
+     * @throws InvalidHeaderValueException if the value is invalid.
+     *         RuntimeException if field's value is not Octet.
+     */
+    public void setMessageType(int value) throws InvalidHeaderValueException {
+        mPduHeaders.setOctet(value, PduHeaders.MESSAGE_TYPE);
+    }
+    /**
+     * Get X-Mms-MMS-Version field value.
+     *
+     * @return the X-Mms-MMS-Version value
+     */
+    public int getMmsVersion() {
+        return mPduHeaders.getOctet(PduHeaders.MMS_VERSION);
+    }
+    /**
+     * Set X-Mms-MMS-Version field value.
+     *
+     * @param value the value
+     * @throws InvalidHeaderValueException if the value is invalid.
+     *         RuntimeException if field's value is not Octet.
+     */
+    public void setMmsVersion(int value) throws InvalidHeaderValueException {
+        mPduHeaders.setOctet(value, PduHeaders.MMS_VERSION);
+    }
+    /**
+     * Get From value.
+     * From-value = Value-length
+     *      (Address-present-token Encoded-string-value | Insert-address-token)
+     *
+     * @return the value
+     */
+    public EncodedStringValue getFrom() {
+       return mPduHeaders.getEncodedStringValue(PduHeaders.FROM);
+    }
+    /**
+     * Set From value.
+     *
+     * @param value the value
+     * @throws NullPointerException if the value is null.
+     */
+    public void setFrom(EncodedStringValue value) {
+        mPduHeaders.setEncodedStringValue(value, PduHeaders.FROM);
+    }
+}
 /**
  * Encoded-string-value = Text-string | Value-length Char-set Text-string
  */
@@ -92,8 +177,8 @@ private class EncodedStringValue implements Cloneable {
         try {
             mData = data.getBytes(CharacterSets.DEFAULT_CHARSET_NAME);
             mCharacterSet = CharacterSets.DEFAULT_CHARSET;
-        } catch (UnsupportedEncodingException e) {
-            Log.e(TAG, "Default encoding must be supported.", e);
+        } catch () {
+            
         }
     }
     /**
@@ -150,14 +235,7 @@ private class EncodedStringValue implements Cloneable {
             try {
                 String name = CharacterSets.getMimeName(mCharacterSet);
                 return new String(mData, name);
-            } catch (UnsupportedEncodingException e) {
-            	if (LOCAL_LOGV) {
-            		Log.v(TAG, e.getMessage(), e);
-            	}
-            	try {
-                    return new String(mData, CharacterSets.MIMENAME_ISO_8859_1);
-                } catch (UnsupportedEncodingException _) {
-                    return new String(mData); // system default encoding.
+            } catch () {            	
                 }
             }
         }
@@ -221,7 +299,7 @@ private class EncodedStringValue implements Cloneable {
             try {
                 ret[i] = new EncodedStringValue(mCharacterSet,
                         temp[i].getBytes());
-            } catch (NullPointerException _) {
+            } catch () {
                 // Can't arrive here
                 return null;
             }
