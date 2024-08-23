@@ -196,7 +196,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 imgPart.SetData(sampleImageData);
                 imgPart.SetContentType(new EncodedStringValue("image/jpg").GetTextString());
                 //imgPart.SetFilename(new EncodedStringValue(System.IO.Path.GetFileName(filePath)).GetTextString());
-                imgPart.SetFilename(new EncodedStringValue(Paths.get(filePath).GetFileName).GetTextString());
+                imgPart.SetFilename(new EncodedStringValue(Paths.get(filePath).GetFileName()).GetTextString());
                 pduBody.AddPart(imgPart);
 
                 // Now create body of MMS
