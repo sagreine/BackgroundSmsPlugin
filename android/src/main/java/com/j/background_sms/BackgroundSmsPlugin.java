@@ -228,19 +228,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
         private boolean SendMMSData(byte[] PDUData, Integer simSlot, SmsManager sm)
         {
-
-          context = activity;
-          /*
-          SmsManager sm;
-          if (simSlot == null) {
-            sm = sm.getDefault();
-          } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-              sm = sm.getSmsManagerForSubscriptionId(simSlot);
-            } else {
-              sm = sm.getDefault();
-           }
-         }      */             
+          context = activity;         
             try
             {
               //String cacheFilePath = System.IO.Path.combine(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
@@ -267,7 +255,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                     //sm.SendMultimediaMessage(CTX, contentURI, null, null, pendingIntent);
                     //sm.SendMultimediaMessage(context, FileProvider.GetUriForFile(context, context.PackageName + ".fileprovider"), testFile, null, null, pendingIntent);                    
                     //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider"), testFile, null, null, pendingIntent);                    
-                    sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider", testFile), null, null, pendingIntent);       
+                    sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider", testFile), null, null, pendingIntent);  
+                    return true;
                 }
             }
             catch(Exception ex)
