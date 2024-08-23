@@ -53,9 +53,9 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
   /// when the Flutter Engine is detached from the Activity
-  private var channel : MethodChannel;
-  private var context: Context;
-  private var activity: Activity;
+  private var MethodChannel channel;
+  private var Context context;
+  private var Activity activity;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -64,9 +64,22 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
     context = flutterPluginBinding.applicationContext
   }
   @Override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-    activity = binding.getActivity();
+    this.activity = activityPluginBinding.getActivity();
 }
+      @Override
+    public void onDetachedFromActivityForConfigChanges() {
+        // TODO: the Activity your plugin was attached to was destroyed to change configuration.
+        // This call will be followed by onReattachedToActivityForConfigChanges().
+    }
+    @Override
+    public void onReattachedToActivityForConfigChanges(ActivityPluginBinding activityPluginBinding) {
+        // TODO: your plugin is now attached to a new Activity after a configuration change.
+    }
 
+    @Override
+    public void onDetachedFromActivity() {
+        // TODO: your plugin is no longer associated with an Activity. Clean up references.
+    }
 
 
   // This static function is optional and equivalent to onAttachedToEngine. It supports the old
