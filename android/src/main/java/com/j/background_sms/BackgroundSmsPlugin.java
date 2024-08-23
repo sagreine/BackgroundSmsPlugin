@@ -176,7 +176,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
             if (sendPDUData != null)
             {
-             //   SendMMSData(sendPDUData, simSlot, smsManager);
+              SendMMSData(sendPDUData, simSlot, smsManager);
               result.success("Sent MMS yay");
             }
            
