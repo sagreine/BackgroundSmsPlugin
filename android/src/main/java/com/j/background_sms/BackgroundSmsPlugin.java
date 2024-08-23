@@ -124,9 +124,10 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
     }
   }
 
-  private String PrintFromJava(){
+  private String PrintFromJava(String str){
         System.out.print("this is a print in java mainactivity");
-        return "This is a string returned from Java";
+     return str;
+        //return "This is a string returned from Java";
     }
 
   private void isSupportCustomSim(Result result){
