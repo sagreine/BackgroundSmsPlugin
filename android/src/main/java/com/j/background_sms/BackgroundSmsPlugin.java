@@ -189,11 +189,12 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 // Add image data 
                 // TODO: Later, this will be audio file. But image file for testing
                 PduPart imgPart = new PduPart();
-                byte[] sampleImageData = System.IO.File.ReadAllBytes(filePath);
+                byte[] sampleImageData = Files.readAllBytes(filePath);
 
                 imgPart.SetData(sampleImageData);
                 imgPart.SetContentType(new EncodedStringValue("image/jpg").GetTextString());
-                imgPart.SetFilename(new EncodedStringValue(System.IO.Path.GetFileName(filePath)).GetTextString());
+                //imgPart.SetFilename(new EncodedStringValue(System.IO.Path.GetFileName(filePath)).GetTextString());
+                imgPart.SetFilename(new EncodedStringValue(Paths.get(filePath).GetFileName).GetTextString());
                 pduBody.AddPart(imgPart);
 
                 // Now create body of MMS
