@@ -180,14 +180,17 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
                 //sendReq.AddTo(new EncodedStringValue(DestinationNumber));
                 //byte[] sendy = DestinationNumber.getBytes();
-                sendReq.AddTo(new EncodedStringValue.extract(DestinationNumber));
+                 EncodedStringValue n = new EncodedStringValue(DestinationNumber);
+              EncodedStringValue[] send = { n };
+                //sendReq.AddTo(new EncodedStringValue.extract(DestinationNumber));
+                sendReq.AddTo(send);
 
                 PduBody pduBody = new PduBody();
 
                 // Add text message data to message
                 PduPart txtPart = new PduPart();
                 // Encoding.ASCII.GetBytes
-                txtPart.setData((msg.GetBytes(StandardCharsets.US_ASCII)));
+                txtPart.setData((msg.getBytes(StandardCharsets.US_ASCII)));
                 txtPart.setContentType(new EncodedStringValue("text/plan").getTextString());
                 txtPart.setName(new EncodedStringValue("Message").getTextString());
                 pduBody.addPart(txtPart);
