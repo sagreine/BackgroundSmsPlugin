@@ -33,6 +33,7 @@ import android.os.Build;
 import android.telephony.SmsManager;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 
 import java.util.UUID;
 
