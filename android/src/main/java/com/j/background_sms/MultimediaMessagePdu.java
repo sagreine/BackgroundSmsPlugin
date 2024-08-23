@@ -1,5 +1,5 @@
 
-private class MultimediaMessagePdu extends GenericPdu{
+public class MultimediaMessagePdu extends GenericPdu{
     /**
      * The body.
      */

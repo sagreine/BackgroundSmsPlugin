@@ -27,11 +27,21 @@ import java.io.IOException;
 
 import androidx.annotation.NonNull;
 
-import com.j.background_sms.SendReq;
-import com.j.background_sms.PduBody;
-import com.j.background_sms.PduPart;
-import com.j.background_sms.PduHeaders;
-import com.j.background_sms.EncodedStringValue;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Build;
+import android.telephony.SmsManager;
+
+import androidx.annotation.NonNull;
+
+import java.util.UUID;
+
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
+import io.flutter.plugin.common.MethodChannel.Result;
+import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** BackgroundSmsPlugin */
 public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler {
