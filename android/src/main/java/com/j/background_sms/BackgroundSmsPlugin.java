@@ -182,21 +182,21 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 // Add text message data to message
                 PduPart txtPart = new PduPart();
                 // Encoding.ASCII.GetBytes
-                txtPart.SetData((msg.GetBytes(StandardCharsets.US_ASCII)));
-                txtPart.SetContentType(new EncodedStringValue("text/plan").GetTextString());
-                txtPart.SetName(new EncodedStringValue("Message").GetTextString());
-                pduBody.AddPart(txtPart);
+                txtPart.setData((msg.GetBytes(StandardCharsets.US_ASCII)));
+                txtPart.setContentType(new EncodedStringValue("text/plan").getTextString());
+                txtPart.setName(new EncodedStringValue("Message").getTextString());
+                pduBody.addPart(txtPart);
 
                 // Add image data 
                 // TODO: Later, this will be audio file. But image file for testing
                 PduPart imgPart = new PduPart();
                 byte[] sampleImageData = Files.readAllBytes(filePath);
 
-                imgPart.SetData(sampleImageData);
-                imgPart.SetContentType(new EncodedStringValue("image/jpg").GetTextString());
+                imgPart.setData(sampleImageData);
+                imgPart.setContentType(new EncodedStringValue("image/jpg").getTextString());
                 //imgPart.SetFilename(new EncodedStringValue(System.IO.Path.GetFileName(filePath)).GetTextString());
-                imgPart.SetFilename(new EncodedStringValue(Paths.get(filePath).GetFileName()).GetTextString());
-                pduBody.AddPart(imgPart);
+                imgPart.setFilename(new EncodedStringValue(Paths.get(filePath).GetFileName()).getTextString());
+                pduBody.addPart(imgPart);
 
                 // Now create body of MMS
                 sendReq.Body = pduBody;
@@ -251,12 +251,12 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
                     //sm.SendMultimediaMessage(CTX, contentURI, null, null, pendingIntent);
                     //sm.SendMultimediaMessage(context, FileProvider.GetUriForFile(context, context.PackageName + ".fileprovider"), testFile, null, null, pendingIntent);                    
-                    sm.SendMultimediaMessage(context, FileProvider.GetUriForFile(context, "background_sms" + ".fileprovider"), testFile, null, null, pendingIntent);                    
+                    sm.sendMultimediaMessage(context, FileProvider.GetUriForFile(context, "background_sms" + ".fileprovider"), testFile, null, null, pendingIntent);                    
                 }
             }
             catch(Exception ex)
             {
-                String exString = ex.ToString();
+                String exString = ex.toString();
                 return false;
             }
             return true;
