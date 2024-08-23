@@ -210,12 +210,12 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
               
                 PduPart imgPart = new PduPart();
                 byte[] sampleImageData = Files.readAllBytes(Paths.get(filePath));
-                /*
+                
                 imgPart.setData(sampleImageData);
                 imgPart.setContentType(new EncodedStringValue("image/jpg").getTextString());
                 imgPart.setFilename((Paths.get(filePath).getFileName()).toString().getBytes());
                 pduBody.addPart(imgPart);
-
+/*
                 // Now create body of MMS                
                 sendReq.setBody(pduBody);
                 // Finally, generate the byte array to send to the MMS provider
