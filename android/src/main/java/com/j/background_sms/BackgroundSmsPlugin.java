@@ -244,7 +244,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             {
               //String cacheFilePath = System.IO.Path.combine(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
               //String cacheFilePath = Paths.get(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat").toString();
-              String cacheFilePath = Paths.get(context.getCacheDir(), "send." + "sendMe" + ".dat").toString();
+              String cacheFilePath = Paths.get(context.getCacheDir().toString(), "send." + "sendMe" + ".dat").toString();
 //                System.IO.File.WriteAllBytes(cacheFilePath, PDUData);
               Files.write(Paths.get(cacheFilePath), PDUData);
 //                Java.IO.File testFile = new Java.IO.File(cacheFilePath);
