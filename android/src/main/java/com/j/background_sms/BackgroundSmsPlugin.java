@@ -63,7 +63,8 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
     channel.setMethodCallHandler(this);     
     context = flutterPluginBinding.applicationContext;
   }
-  @Override fun onAttachedToActivity(ActivityPluginBinding binding ) {
+  @Override
+  public void onAttachedToActivity(ActivityPluginBinding binding ) {
     this.activity = activityPluginBinding.getActivity();
 }
       @Override
