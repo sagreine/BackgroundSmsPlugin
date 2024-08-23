@@ -20,6 +20,7 @@ import android.os.ParcelFileDescriptor;
 import android.telephony.PhoneNumberUtils;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
@@ -226,14 +227,17 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
 
                 String authString = context.PackageName + ".fileprovider";
-                if (System.IO.File.Exists(cacheFilePath))
+              if(Files.exists(Paths.get(cacheFilePath)))
+              //if(f.isFile())
+                //if (System.IO.File.Exists(cacheFilePath))
                 {
                     //Android.Net.Uri contentURI = (AndroidX.Core.Content.FileProvider.GetUriForFile(CTX, CTX.PackageName + ".fileprovider", testFile));
                     //Android.Net.Uri contentUri = (FileProvider.GetUriForFile(ctx, ctx.PackageName + ".fileprovider", testFile));
                     PendingIntent pendingIntent = PendingIntent.GetBroadcast(context, 0, new Intent(context.PackageName + ".WAP_PUSH_DELIVER"), 0);
 
                     //sm.SendMultimediaMessage(CTX, contentURI, null, null, pendingIntent);
-                    sm.SendMultimediaMessage(context, FileProvider.GetUriForFile(context, context.PackageName + ".fileprovider"), testFile, null, null, pendingIntent);                    
+                    //sm.SendMultimediaMessage(context, FileProvider.GetUriForFile(context, context.PackageName + ".fileprovider"), testFile, null, null, pendingIntent);                    
+                    sm.SendMultimediaMessage(context, FileProvider.GetUriForFile(context, "background_sms" + ".fileprovider"), testFile, null, null, pendingIntent);                    
                 }
             }
             catch(Exception ex)
