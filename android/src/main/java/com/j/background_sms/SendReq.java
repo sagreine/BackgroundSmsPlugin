@@ -16,7 +16,7 @@ public class SendReq extends MultimediaMessagePdu {
                  //mPduHeaders.put(P_CONTENT_TYPE_IN, "application/vnd.wap.multipart.related".getBytes());
      
             setFrom(new EncodedStringValue(PduHeaders.FROM_INSERT_ADDRESS_TOKEN_STR.getBytes()));
-            //setTransactionId(generateTransactionId());
+            setTransactionId(generateTransactionId());
     }
       public void AddTo(EncodedStringValue[] value) {
         mPduHeaders.setEncodedStringValues(value, PduHeaders.TO);
