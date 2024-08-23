@@ -178,6 +178,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             if (sendPDUData != null)
             {
                 SendMMSData(sendPDUData, simSlot, smsManager);
+              result.success("Sent");
             }
         }catch (Exception ex) {
       ex.printStackTrace();
