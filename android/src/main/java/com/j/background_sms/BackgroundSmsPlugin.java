@@ -180,7 +180,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
                 //sendReq.AddTo(new EncodedStringValue(DestinationNumber));
                 byte[] sendy = DestinationNumber.getBytes();
-                sendReq.AddTo(new EncodedStringValue(sendy);
+                sendReq.AddTo(new EncodedStringValue(sendy));
 
                 PduBody pduBody = new PduBody();
 
