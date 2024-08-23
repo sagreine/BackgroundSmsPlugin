@@ -231,7 +231,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             catch(Exception ex)
             {
                 // TODO: Do something here
-              result.error("Failed", "GetMMSPDUData failure:" + ex.toString(), "");
+              result.error("Failed", "GetMMSPDUData failure be like:" + ex.toString(), "");
               return pduData;
             }
             return pduData;
