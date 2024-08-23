@@ -12,7 +12,8 @@ public class SendReq extends MultimediaMessagePdu {
             // FIXME: Content-type must be decided according to whether
             // SMIL part present.
             //setContentType("application/vnd.wap.multipart.related".getBytes());
-         mPartHeader.put(P_CONTENT_TYPE_IN, "application/vnd.wap.multipart.related".getBytes());
+              //mPartHeader.put(P_CONTENT_TYPE_IN, "application/vnd.wap.multipart.related".getBytes());
+                 mPduHeaders.put(P_CONTENT_TYPE_IN, "application/vnd.wap.multipart.related".getBytes());
      
             setFrom(new EncodedStringValue(PduHeaders.FROM_INSERT_ADDRESS_TOKEN_STR.getBytes()));
             //setTransactionId(generateTransactionId());
