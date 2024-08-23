@@ -61,11 +61,11 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "background_sms");
     channel.setMethodCallHandler(this);     
-    context = flutterPluginBinding.applicationContext;
+    //context = flutterPluginBinding.applicationContext;
   }
   @Override
   public void onAttachedToActivity(ActivityPluginBinding binding ) {
-    this.activity = activityPluginBinding.getActivity();
+    activity = binding.getActivity();
 }
       @Override
     public void onDetachedFromActivityForConfigChanges() {
@@ -213,6 +213,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
         private boolean SendMMSData(byte[] PDUData)
         {
             //Context ctx = MainActivity.Instance;
+            context = activity.Instance;
             Android.Telephony.SmsManager sm = Android.Telephony.SmsManager.Default;
           
             try
