@@ -124,10 +124,10 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
     }
   }
 
-  private String PrintFromJava(String str){
+  private String PrintFromJava(){
         System.out.print("this is a print in java mainactivity");
-     return str;
-        //return "This is a string returned from Java";
+     //return str;
+        return "This is a string returned from Java";
     }
 
   private void isSupportCustomSim(Result result){
@@ -151,7 +151,7 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
         }
       }
       smsManager.sendTextMessage(num, null, msg, null, null);
-      PrintFromJava("wow you did it");
+      PrintFromJava();
       result.success("Sent");
     } catch (Exception ex) {
       ex.printStackTrace();
