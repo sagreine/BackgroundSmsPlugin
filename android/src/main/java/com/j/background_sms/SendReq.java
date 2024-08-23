@@ -7,6 +7,8 @@ public class SendReq extends MultimediaMessagePdu {
     private static final int P_CONTENT_TYPE_IN       = 0x91;
     public SendReq() {
         super();
+        
+        try {
             setMessageType(PduHeaders.MESSAGE_TYPE_SEND_REQ);
             setMmsVersion(PduHeaders.CURRENT_MMS_VERSION);
             // FIXME: Content-type must be decided according to whether
@@ -17,6 +19,12 @@ public class SendReq extends MultimediaMessagePdu {
      
             setFrom(new EncodedStringValue(PduHeaders.FROM_INSERT_ADDRESS_TOKEN_STR.getBytes()));
             setTransactionId(generateTransactionId());
+                  } catch (InvalidHeaderValueException e) {
+            // Impossible to reach here since all headers we set above are valid.
+            Log.e(TAG, "Unexpected InvalidHeaderValueException.", e);
+            throw new RuntimeException(e);
+        }
+    }
     }
       public void AddTo(EncodedStringValue[] value) {
         mPduHeaders.setEncodedStringValues(value, PduHeaders.TO);
