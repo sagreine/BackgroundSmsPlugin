@@ -150,6 +150,7 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
         }
       }
       smsManager.sendTextMessage(num, null, msg, null, null);
+      PrintFromJava("wow you did it");
       result.success("Sent");
     } catch (Exception ex) {
       ex.printStackTrace();
