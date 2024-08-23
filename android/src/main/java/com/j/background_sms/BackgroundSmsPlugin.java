@@ -19,11 +19,6 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.telephony.PhoneNumberUtils;
 
-import com.google.android.mms.ContentType;
-import com.google.android.mms.MmsException;
-import com.google.android.mms.pdu.PduBody;
-import com.google.android.mms.pdu.PduPart;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -56,7 +51,7 @@ import java.util.ArrayList;
 /**
  * Encoded-string-value = Text-string | Value-length Char-set Text-string
  */
-public class EncodedStringValue implements Cloneable {
+private class EncodedStringValue implements Cloneable {
     private static final String TAG = "EncodedStringValue";
     private static final boolean DEBUG = false;
     private static final boolean LOCAL_LOGV = false;
@@ -287,7 +282,7 @@ public class EncodedStringValue implements Cloneable {
 /**
  * The pdu part.
  */
-public class PduPart {
+private class PduPart {
     /**
      * Well-Known Parameters.
      */
@@ -619,7 +614,7 @@ public class PduPart {
     }
 }
 
-public class PduBody {
+private class PduBody {
     private Vector<PduPart> mParts = null;
     private Map<String, PduPart> mPartMapByContentId = null;
     private Map<String, PduPart> mPartMapByContentLocation = null;
@@ -768,7 +763,7 @@ public class PduBody {
     }
 }
 
-public class MultimediaMessagePdu extends GenericPdu{
+private class MultimediaMessagePdu extends GenericPdu{
     /**
      * The body.
      */
@@ -882,7 +877,7 @@ public class MultimediaMessagePdu extends GenericPdu{
     }
 }
 
-public class SendReq extends MultimediaMessagePdu {
+private class SendReq extends MultimediaMessagePdu {
     private static final String TAG = "SendReq";
     public SendReq() {
         super();
