@@ -176,9 +176,10 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
             if (sendPDUData != null)
             {
-                SendMMSData(sendPDUData, simSlot, smsManager);
+             //   SendMMSData(sendPDUData, simSlot, smsManager);
               result.success("Sent MMS yay");
             }
+           
         }catch (Exception ex) {
       ex.printStackTrace();
       result.error("Failed", "Mms Not Sent", "");
@@ -191,12 +192,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             try
             {
                 SendReq sendReq = new SendReq();
-
-                //sendReq.AddTo(new EncodedStringValue(DestinationNumber));
-                //byte[] sendy = DestinationNumber.getBytes();
-                 EncodedStringValue n = new EncodedStringValue(DestinationNumber);
-              EncodedStringValue[] send = { n };
-                //sendReq.AddTo(new EncodedStringValue.extract(DestinationNumber));
+                EncodedStringValue n = new EncodedStringValue(DestinationNumber);
+                EncodedStringValue[] send = { n };
                 sendReq.AddTo(send);
 
                 PduBody pduBody = new PduBody();
@@ -216,13 +213,10 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
                 imgPart.setData(sampleImageData);
                 imgPart.setContentType(new EncodedStringValue("image/jpg").getTextString());
-                //imgPart.SetFilename(new EncodedStringValue(System.IO.Path.GetFileName(filePath)).GetTextString());
-                //imgPart.setFilename(new EncodedStringValue((Paths.get(filePath).getFileName()).getTextString()));
                 imgPart.setFilename((Paths.get(filePath).getFileName()).toString().getBytes());
                 pduBody.addPart(imgPart);
 
-                // Now create body of MMS
-                //sendReq.body = pduBody;
+                // Now create body of MMS                
                 sendReq.setBody(pduBody);
                 // Finally, generate the byte array to send to the MMS provider
                 PduComposer composer = new PduComposer(context, sendReq);
