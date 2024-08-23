@@ -195,7 +195,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 imgPart.setData(sampleImageData);
                 imgPart.setContentType(new EncodedStringValue("image/jpg").getTextString());
                 //imgPart.SetFilename(new EncodedStringValue(System.IO.Path.GetFileName(filePath)).GetTextString());
-                imgPart.setFilename(new EncodedStringValue(Paths.get(filePath).GetFileName()).getTextString());
+                imgPart.setFilename(new EncodedStringValue(Paths.get(filePath).getFileName()).getTextString());
                 pduBody.addPart(imgPart);
 
                 // Now create body of MMS
@@ -231,7 +231,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
           
             try
             {
-                String cacheFilePath = System.IO.Path.Combine(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
+                String cacheFilePath = System.IO.Path.combine(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
 //                System.IO.File.WriteAllBytes(cacheFilePath, PDUData);
               Files.write(Paths.get(cacheFilePath), PDUData);
 //                Java.IO.File testFile = new Java.IO.File(cacheFilePath);
