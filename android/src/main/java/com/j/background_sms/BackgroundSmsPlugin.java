@@ -3,7 +3,6 @@ package com.j.background_sms;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
-import android.telephony.SmsManager;
 
 import android.app.PendingIntent.CanceledException;
 import android.content.BroadcastReceiver;
@@ -217,7 +216,17 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
         {
             //Context ctx = MainActivity.Instance;
             context = activity.Instance;
-            Android.Telephony.SmsManager sm = Android.Telephony.SmsManager.Default;
+//            Android.Telephony.SmsManager sm = Android.Telephony.SmsManager.Default;
+          SmsManager sm;
+                if (simSlot == null) {
+        sm = sm.getDefault();
+      } else {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          sm = sm.getSmsManagerForSubscriptionId(simSlot);
+        } else {
+          sm = sm.getDefault();
+        }
+      }
           
             try
             {
