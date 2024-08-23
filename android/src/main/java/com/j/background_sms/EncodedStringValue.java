@@ -150,7 +150,7 @@ public class EncodedStringValue implements Cloneable {
         try {
             return new EncodedStringValue(mCharacterSet, dstBytes);
         } catch (Exception e) {
-            Log.e(TAG, "failed to clone an EncodedStringValue: " + this);
+            
             e.printStackTrace();
             throw new CloneNotSupportedException(e.getMessage());
         }
