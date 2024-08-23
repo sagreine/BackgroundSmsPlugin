@@ -150,7 +150,7 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
   }
 
 private void sendMMS(String num, String msg, String filePath, Integer simSlot,Result result)
-        {
+    {
          try{   
       SmsManager smsManager;
       if (simSlot == null) {
@@ -169,8 +169,11 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             {
                 SendMMSData(sendPDUData, simSlot);
             }
-        }
-        }
+        }catch (Exception ex) {
+      ex.printStackTrace();
+      result.error("Failed", "Mms Not Sent", "");
+      }
+   }
 
         private byte[] GetMMSPDUData(String DestinationNumber, String filePath, String msg)
         {
