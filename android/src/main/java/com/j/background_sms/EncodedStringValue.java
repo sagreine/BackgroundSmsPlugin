@@ -105,7 +105,9 @@ public class EncodedStringValue implements Cloneable {
             try {
                 String name = CharacterSets.getMimeName(mCharacterSet);
                 return new String(mData, name);
-            } catch (Exception e) {            	
+            } catch (Exception e) {       
+                String fail = "this is a manual failure";
+                return fail;
                 
             }
         }
