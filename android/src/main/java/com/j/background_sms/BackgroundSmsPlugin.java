@@ -172,7 +172,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
         }
       }
             
-            byte[] sendPDUData = GetMMSPDUData(num, filePath, msg);
+            byte[] sendPDUData = GetMMSPDUData(num, filePath, msg, result);
 
             if (sendPDUData != null)
             {
