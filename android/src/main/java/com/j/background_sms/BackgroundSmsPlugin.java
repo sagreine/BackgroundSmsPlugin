@@ -215,13 +215,16 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 imgPart.setContentType(new EncodedStringValue("image/jpg").getTextString());
                 imgPart.setFilename((Paths.get(filePath).getFileName()).toString().getBytes());
                 pduBody.addPart(imgPart);
-/*
+
                 // Now create body of MMS                
                 sendReq.setBody(pduBody);
+              
                 // Finally, generate the byte array to send to the MMS provider
-                PduComposer composer = new PduComposer(context, sendReq);
+                //PduComposer composer = new PduComposer(context, sendReq);
+              PduComposer composer = new PduComposer(activity.getApplicationContext(), sendReq);
+              
                 pduData = composer.make();
-              */
+              
             }
             catch(Exception ex)
             {
