@@ -1,5 +1,8 @@
 package com.j.background_sms;
 
+import android.util.Log;
+import com.google.android.mms.InvalidHeaderValueException;
+
 public class SendReq extends MultimediaMessagePdu {
     private static final String TAG = "SendReq";
     public SendReq() {
