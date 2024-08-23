@@ -20,6 +20,7 @@ import android.os.ParcelFileDescriptor;
 import android.telephony.PhoneNumberUtils;
 
 import java.io.File;
+import java.nio.File;
 import java.nio.file.Path;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -221,12 +222,15 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             try
             {
                 String cacheFilePath = System.IO.Path.Combine(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
-                System.IO.File.WriteAllBytes(cacheFilePath, PDUData);
-                Java.IO.File testFile = new Java.IO.File(cacheFilePath);
-                byte[] byteArray = System.IO.File.ReadAllBytes(cacheFilePath);
+//                System.IO.File.WriteAllBytes(cacheFilePath, PDUData);
+              Files.write(Paths.get(cacheFilePath), PDUData);
+//                Java.IO.File testFile = new Java.IO.File(cacheFilePath);
+              File testFile = new File(cacheFilePath);
+//                byte[] byteArray = System.IO.File.ReadAllBytes(cacheFilePath);
+              byte[] byteArray = Files.readAllBytes(cacheFilePath);              
 
-
-                String authString = context.PackageName + ".fileprovider";
+                //String authString = context.PackageName + ".fileprovider";
+              // this is dumb and bad, try reading and catch
               if(Files.exists(Paths.get(cacheFilePath)))
               //if(f.isFile())
                 //if (System.IO.File.Exists(cacheFilePath))
