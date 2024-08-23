@@ -167,7 +167,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
             if (sendPDUData != null)
             {
-                SendMMSData(sendPDUData, simSlot);
+                SendMMSData(sendPDUData, simSlot, smsManager);
             }
         }catch (Exception ex) {
       ex.printStackTrace();
@@ -226,10 +226,11 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
         }
 
-        private boolean SendMMSData(byte[] PDUData, Integer simSlot)
+        private boolean SendMMSData(byte[] PDUData, Integer simSlot, SmsManager sm)
         {
 
           context = activity;
+          /*
           SmsManager sm;
           if (simSlot == null) {
             sm = sm.getDefault();
@@ -239,7 +240,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             } else {
               sm = sm.getDefault();
            }
-         }                   
+         }      */             
             try
             {
               //String cacheFilePath = System.IO.Path.combine(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
