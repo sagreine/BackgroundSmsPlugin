@@ -198,7 +198,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 SendReq sendReq = new SendReq();
                 EncodedStringValue n = new EncodedStringValue(DestinationNumber);
                 EncodedStringValue[] send = { n };
-                sendReq.AddTo(send);
+                sendReq.setTo(send);
 
                 PduBody pduBody = new PduBody();
 
