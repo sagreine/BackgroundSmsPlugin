@@ -240,11 +240,9 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
           context = activity.getApplicationContext();         
             try
             {
-              //String cacheFilePath = System.IO.Path.combine(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat");
-              //String cacheFilePath = Paths.get(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat").toString();
-              String cacheFilePath = Paths.get(context.getCacheDir().toString(), "send." + "sendMe" + ".dat").toString();
-//                System.IO.File.WriteAllBytes(cacheFilePath, PDUData);
-              result.error("Failed", "SendMMSData cacheFilePath be:" + cacheFilePath, "");      
+              //String cacheFilePath = Paths.get(context.getCacheDir().toString(), "send." + "sendMe" + ".dat").toString();
+              String cacheFilePath = Paths.get(context.getCacheDir().getAbsolutePath.toString(), "/", "send." + "sendMe" + ".dat").toString();
+              //result.error("Failed", "SendMMSData cacheFilePath be:" + cacheFilePath, "");      
               return;
               /*
               Files.write(Paths.get(cacheFilePath), PDUData);
