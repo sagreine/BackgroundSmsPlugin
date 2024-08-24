@@ -178,7 +178,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             if (sendPDUData != null)
             {
               SendMMSData(sendPDUData, simSlot, smsManager, result);
-              result.success("Sent MMS yay");
+             // result.success("Sent MMS yay");
             }
            
         }catch (Exception ex) {
@@ -248,7 +248,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
               /*
               Files.write(Paths.get(cacheFilePath), PDUData);
               File testFile = new File(cacheFilePath);
-              byte[] byteArray = Files.readAllBytes(Paths.get(cacheFilePath));              
+              //byte[] byteArray = Files.readAllBytes(Paths.get(cacheFilePath));              
 
                 //String authString = context.PackageName + ".fileprovider";
               // this is dumb and bad, try reading and catch
