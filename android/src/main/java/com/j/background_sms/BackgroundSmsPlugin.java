@@ -160,6 +160,7 @@ public class BackgroundSmsPlugin implements FlutterPlugin, MethodCallHandler, Ac
 
 private void sendMMS(String num, String msg, String filePath, Integer simSlot,Result result)
     {
+      context = activity.getApplicationContext();    
          try{   
       SmsManager smsManager;
       if (simSlot == null) {
@@ -220,8 +221,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 sendReq.setBody(pduBody);
               
                 // Finally, generate the byte array to send to the MMS provider
-                //PduComposer composer = new PduComposer(context, sendReq);
-                PduComposer composer = new PduComposer(activity.getApplicationContext(), sendReq);
+                PduComposer composer = new PduComposer(context, sendReq);
+                //PduComposer composer = new PduComposer(activity.getApplicationContext(), sendReq);
               
                 pduData = composer.make();
               
@@ -237,14 +238,14 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
         private void SendMMSData(byte[] PDUData, Integer simSlot, SmsManager sm, Result result)
         {
-          context = activity.getApplicationContext();         
+          //context = activity.getApplicationContext();         
             try
             {
               //String cacheFilePath = Paths.get(context.getCacheDir().toString(), "send." + "sendMe" + ".dat").toString();
               String cacheFilePath = Paths.get(context.getCacheDir().getAbsolutePath().toString(), "/", "send." + "sendMe" + ".dat").toString();
               //result.error("Failed", "SendMMSData cacheFilePath be:" + cacheFilePath, "");      
-              return;
-              /*
+              //return;
+              
               Files.write(Paths.get(cacheFilePath), PDUData);
               File testFile = new File(cacheFilePath);
               byte[] byteArray = Files.readAllBytes(Paths.get(cacheFilePath));              
@@ -256,7 +257,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                     PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), 0); 
                   sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);                  
                 }
-              */
+              
             }
             catch(Exception ex)
             {
