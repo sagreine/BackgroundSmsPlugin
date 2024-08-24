@@ -243,9 +243,9 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             {
               //String cacheFilePath = Paths.get(context.getCacheDir().toString(), "send." + "sendMe" + ".dat").toString();
               String cacheFilePath = Paths.get(context.getCacheDir().getAbsolutePath().toString(), "/", "send." + "sendMe" + ".dat").toString();
-              //result.error("Failed", "SendMMSData cacheFilePath be:" + cacheFilePath, "");      
-              //return;
-              
+              result.error("Failed", "SendMMSData cacheFilePath bes: " + cacheFilePath, "");      
+              return;
+              /*
               Files.write(Paths.get(cacheFilePath), PDUData);
               File testFile = new File(cacheFilePath);
               byte[] byteArray = Files.readAllBytes(Paths.get(cacheFilePath));              
@@ -254,10 +254,10 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
               // this is dumb and bad, try reading and catch
               if(Files.exists(Paths.get(cacheFilePath)))
                 {                   
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), 0); 
+                  PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), 0); 
                   sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);                  
                 }
-              
+              */
             }
             catch(Exception ex)
             {
