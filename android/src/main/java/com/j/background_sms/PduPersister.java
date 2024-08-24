@@ -58,7 +58,7 @@ public class PduPersister {
      * The uri of temporary drm objects.
      */
     public static final String TEMPORARY_DRM_OBJECT_URI =
-        "content://mms/" + Long.MAX_VALUE + "/part";*/
+        "content://mms/" + Long.MAX_VALUE + "/part";
     /**
      * Indicate that we transiently failed to process a MM.
      */
