@@ -252,6 +252,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
               
               Files.write(Paths.get(cacheFilePath), PDUData);
               File testFile = new File(cacheFilePath);
+              Log.i("manual nag:" ,"scott says testfile is this big in sendmssdata: " + testFile.length());
               //byte[] byteArray = Files.readAllBytes(Paths.get(cacheFilePath));              
 
                 //String authString = context.PackageName + ".fileprovider";
