@@ -238,6 +238,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
         private void SendMMSData(byte[] PDUData, Integer simSlot, SmsManager sm, Result result)
         {
+          log.i("scott says pdudata in sendmssdata length is: " + PDUData.length.toString());
           //context = activity.getApplicationContext();         
           //SmsManager sm = SmsManager.getSmsManagerForSubscriptionId(simSlot);
             try
@@ -256,7 +257,13 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                 {                   
                   PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), PendingIntent.FLAG_MUTABLE); 
               //result.error("Failed", "SendMMSData failure be like:" + FileProvider.getUriForFile(context, context.getPackageName().toString() + ".fileprovider", testFile), "");   
-                  sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);                  
+                  //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);   
+                  Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile);
+                  DocumentFile taway = DocumentFile.fromSingleUri(context,uri);
+                  log.i("scott says uri is: " + uri);
+                  log.i("scott says df is a file: " + taway.exists());
+                  log.i("scott says df path is: " + taway.getAbsolutePath());
+                  sm.sendMultimediaMessage(context, uri, null, null, pendingIntent);                  
                 }              
             }
             catch(Exception ex)
