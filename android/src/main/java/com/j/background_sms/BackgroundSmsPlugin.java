@@ -246,30 +246,19 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 //                System.IO.File.WriteAllBytes(cacheFilePath, PDUData);
               result.error("Failed", "SendMMSData cacheFilePath be:" + cacheFilePath, "");      
               return;
+              /*
               Files.write(Paths.get(cacheFilePath), PDUData);
-//                Java.IO.File testFile = new Java.IO.File(cacheFilePath);
               File testFile = new File(cacheFilePath);
-//                byte[] byteArray = System.IO.File.ReadAllBytes(cacheFilePath);
               byte[] byteArray = Files.readAllBytes(Paths.get(cacheFilePath));              
 
                 //String authString = context.PackageName + ".fileprovider";
               // this is dumb and bad, try reading and catch
               if(Files.exists(Paths.get(cacheFilePath)))
-              //if(f.isFile())
-                //if (System.IO.File.Exists(cacheFilePath))
-                {
-                    //Android.Net.Uri contentURI = (AndroidX.Core.Content.FileProvider.GetUriForFile(CTX, CTX.PackageName + ".fileprovider", testFile));
-                    //Android.Net.Uri contentUri = (FileProvider.GetUriForFile(ctx, ctx.PackageName + ".fileprovider", testFile));
-                    //PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.PackageName + ".WAP_PUSH_DELIVER"), 0);
-                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), 0);
-
-                    //sm.SendMultimediaMessage(CTX, contentURI, null, null, pendingIntent);
-                    //sm.SendMultimediaMessage(context, FileProvider.GetUriForFile(context, context.PackageName + ".fileprovider"), testFile, null, null, pendingIntent);                    
-                    //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider"), testFile, null, null, pendingIntent);                    
-                    //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider", testFile), null, null, pendingIntent);  
-                  sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);  
-                 result.error("Failed", "SendMMSData cacheFilePath be:" + cacheFilePath, "");      
+                {                   
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), 0); 
+                  sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);                  
                 }
+              */
             }
             catch(Exception ex)
             {
