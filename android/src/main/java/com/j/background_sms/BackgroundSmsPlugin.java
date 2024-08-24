@@ -178,7 +178,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
             if (sendPDUData != null)
             {
               SendMMSData(sendPDUData, simSlot, smsManager, result);
-             // result.success("Sent MMS yay");
+             result.success("Sent MMS yay");
             }
            
         }catch (Exception ex) {
@@ -255,9 +255,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
               if(Files.exists(Paths.get(cacheFilePath)))
                 {                   
                   PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), 0); 
-                  result.error("Failed", "SendMMSData PendingIntent bes: " + pendingIntent.toString(), "");  
-                  return;
-                  //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);                  
+                  sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);                  
                 }              
             }
             catch(Exception ex)
