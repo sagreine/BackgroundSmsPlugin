@@ -240,7 +240,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
 
         private void SendMMSData(byte[] PDUData, Integer simSlot, SmsManager sm, Result result)
         {
-          log.i("scott says pdudata in sendmssdata length is: " + PDUData.length.toString());
+          Log.i("scott says pdudata in sendmssdata length is: " + PDUData.length);
           //context = activity.getApplicationContext();         
           //SmsManager sm = SmsManager.getSmsManagerForSubscriptionId(simSlot);
             try
@@ -262,9 +262,9 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                   //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);   
                   Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile);
                   DocumentFile taway = DocumentFile.fromSingleUri(context,uri);
-                  log.i("scott says uri is: " + uri);
-                  log.i("scott says df is a file: " + taway.exists());
-                  log.i("scott says df path is: " + taway.getAbsolutePath());
+                  Log.i("scott says uri is: " + uri);
+                  Log.i("scott says df is a file: " + taway.exists());
+                  Log.i("scott says df path is: " + taway.getAbsolutePath());
                   sm.sendMultimediaMessage(context, uri, null, null, pendingIntent);                  
                 }              
             }
