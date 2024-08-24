@@ -254,7 +254,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
               // this is dumb and bad, try reading and catch
               if(Files.exists(Paths.get(cacheFilePath)))
                 {                   
-                  PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), 0); 
+                  PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), PendingIntent.FLAG_MUTABLE); 
               //result.error("Failed", "SendMMSData failure be like:" + FileProvider.getUriForFile(context, context.getPackageName().toString() + ".fileprovider", testFile), "");   
                   sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);                  
                 }              
