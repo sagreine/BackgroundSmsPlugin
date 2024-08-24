@@ -264,8 +264,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                   Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile);
                   //File taway = new File(uri.getPath());
                   Log.i("manual nag:" ,"scott says uri is: " + uri);
-                  Log.i("manual nag:" ,"scott says df is a file: " + taway.exists());
-                  Log.i("manual nag:" ,"scott says df path is: " + taway.getAbsolutePath());
+                  //Log.i("manual nag:" ,"scott says df is a file: " + taway.exists());
+                  Log.i("manual nag:" ,"scott says uri.getPath() is: " + uri.getPath());
                   sm.sendMultimediaMessage(context, uri, null, null, pendingIntent);                  
                 }              
             }
