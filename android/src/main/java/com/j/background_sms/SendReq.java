@@ -13,7 +13,8 @@ public class SendReq extends MultimediaMessagePdu {
             setMmsVersion(PduHeaders.CURRENT_MMS_VERSION);
             // FIXME: Content-type must be decided according to whether
             // SMIL part present.
-            setContentType("application/vnd.wap.multipart.related".getBytes());
+//            setContentType("application/vnd.wap.multipart.related".getBytes());
+  setContentType("application/vnd.wap.mms-message".getBytes());          
               //mPartHeader.put(P_CONTENT_TYPE_IN, "application/vnd.wap.multipart.related".getBytes());
                  //mPduHeaders.put(P_CONTENT_TYPE_IN, "application/vnd.wap.multipart.related".getBytes());
      
