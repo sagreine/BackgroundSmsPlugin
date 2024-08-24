@@ -262,10 +262,10 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
               //result.error("Failed", "SendMMSData failure be like:" + FileProvider.getUriForFile(context, context.getPackageName().toString() + ".fileprovider", testFile), "");   
                   //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);   
                   Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile);
-                  DocumentFile taway = DocumentFile.fromSingleUri(context,uri);
+                  //DocumentFile taway = DocumentFile.fromSingleUri(context,uri);
                   Log.i("manual nag:" ,"scott says uri is: " + uri);
-                  Log.i("manual nag:" ,"scott says df is a file: " + taway.exists());
-                  Log.i("manual nag:" ,"scott says df path is: " + taway.getAbsolutePath());
+                  //Log.i("manual nag:" ,"scott says df is a file: " + taway.exists());
+                  //Log.i("manual nag:" ,"scott says df path is: " + taway.getAbsolutePath());
                   sm.sendMultimediaMessage(context, uri, null, null, pendingIntent);                  
                 }              
             }
