@@ -262,7 +262,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                   PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), PendingIntent.FLAG_MUTABLE); 
               //result.error("Failed", "SendMMSData failure be like:" + FileProvider.getUriForFile(context, context.getPackageName().toString() + ".fileprovider", testFile), "");   
                   //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);   
-                  Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile);
+                  //Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile);
+                  Uri uri = FileProvider.getUriForFile(context, context.getPackageName(), testFile);
                   //File taway = new File(uri.getPath());
                   Log.i("manual nag:" ,"scott says uri is: " + uri);
                   //Log.i("manual nag:" ,"scott says df is a file: " + taway.exists());
