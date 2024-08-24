@@ -266,7 +266,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                     //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider"), testFile, null, null, pendingIntent);                    
                     //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider", testFile), null, null, pendingIntent);  
                   sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);  
-                 result.error("Failed", "SendMMSData cacheFilePath be:" + cacheFilePath, "");      
+                 //result.error("Failed", "SendMMSData cacheFilePath be:" + cacheFilePath, "");      
                 }
             }
             catch(Exception ex)
