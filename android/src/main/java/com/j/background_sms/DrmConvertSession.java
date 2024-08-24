@@ -13,9 +13,8 @@ public class DrmConvertSession {
     private DrmManagerClient mDrmClient;
     private int mConvertSessionId;
     private static final String TAG = "DrmConvertSession";
-      * This download hasn't stated yet
-         */
-        public static final int STATUS_PENDING = 190;
+      
+                 public static final int STATUS_PENDING = 190;
         /**
          * This download has started
          */
