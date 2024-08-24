@@ -239,13 +239,13 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
         private void SendMMSData(byte[] PDUData, Integer simSlot, SmsManager sm, Result result)
         {
           //context = activity.getApplicationContext();         
+          //SmsManager sm = SmsManager.getSmsManagerForSubscriptionId(simSlot);
             try
             {
               //String cacheFilePath = Paths.get(context.getCacheDir().toString(), "send." + "sendMe" + ".dat").toString();
               String cacheFilePath = Paths.get(context.getCacheDir().getAbsolutePath().toString(), "/", "send." + "sendMe" + ".dat").toString();
-              result.error("Failed", "SendMMSData cacheFilePath bes: " + cacheFilePath, "");      
-              return;
-              /*
+              //result.error("Failed", "SendMMSData cacheFilePath bes: " + cacheFilePath, "");      
+              
               Files.write(Paths.get(cacheFilePath), PDUData);
               File testFile = new File(cacheFilePath);
               //byte[] byteArray = Files.readAllBytes(Paths.get(cacheFilePath));              
@@ -255,9 +255,10 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
               if(Files.exists(Paths.get(cacheFilePath)))
                 {                   
                   PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), 0); 
+                  result.error("Failed", "SendMMSData PendingIntent bes: " + pendingIntent.toString(), "");  
+                  return;
                   sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);                  
-                }
-              */
+                }              
             }
             catch(Exception ex)
             {
