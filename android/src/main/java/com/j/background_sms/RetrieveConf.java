@@ -1,8 +1,7 @@
 package com.j.background_sms;
 
 
- * M-Retrive.conf Pdu.
- */
+
 public class RetrieveConf extends MultimediaMessagePdu {
     /**
      * Empty constructor.
