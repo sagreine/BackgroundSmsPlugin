@@ -244,6 +244,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
               //String cacheFilePath = Paths.get(context.CacheDir.AbsolutePath, "send." + "sendMe" + ".dat").toString();
               String cacheFilePath = Paths.get(context.getCacheDir().toString(), "send." + "sendMe" + ".dat").toString();
 //                System.IO.File.WriteAllBytes(cacheFilePath, PDUData);
+              result.error("Failed", "SendMMSData cacheFilePath be:" + cacheFilePath, "");      
+              return;
               Files.write(Paths.get(cacheFilePath), PDUData);
 //                Java.IO.File testFile = new Java.IO.File(cacheFilePath);
               File testFile = new File(cacheFilePath);
@@ -266,7 +268,7 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
                     //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider"), testFile, null, null, pendingIntent);                    
                     //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, "background_sms" + ".fileprovider", testFile), null, null, pendingIntent);  
                   sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);  
-                 //result.error("Failed", "SendMMSData cacheFilePath be:" + cacheFilePath, "");      
+                 result.error("Failed", "SendMMSData cacheFilePath be:" + cacheFilePath, "");      
                 }
             }
             catch(Exception ex)
