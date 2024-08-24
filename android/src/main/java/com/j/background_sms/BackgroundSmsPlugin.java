@@ -255,7 +255,8 @@ private void sendMMS(String num, String msg, String filePath, Integer simSlot,Re
               if(Files.exists(Paths.get(cacheFilePath)))
                 {                   
                   PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, new Intent(context.getPackageName() + ".WAP_PUSH_DELIVER"), 0); 
-                  sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);                  
+              result.error("Failed", "SendMMSData failure be like:" + FileProvider.getUriForFile(context, context.getPackageName().toString() + ".fileprovider", testFile), "");   
+                  //sm.sendMultimediaMessage(context, FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", testFile), null, null, pendingIntent);                  
                 }              
             }
             catch(Exception ex)
